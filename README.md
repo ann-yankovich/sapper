@@ -1,2 +1,0 @@
-# sapper
-Created with CodeSandbox

@@ -1,0 +1,44 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+li input[type='radio'] {
+  display: none;
+}
+
+label.easy {
+  background-color: #17a2b8;
+}
+
+label.normal {
+  background-color: #28a745;
+}
+
+label.hard {
+  background-color: #ffc107;
+}
+
+label.nightmare {
+  background-color: #dc3545;
+}
+
+input[type='radio']:checked + label,
+label:hover {
+  box-shadow: inset 0 0 4px 1px rgba(0, 0, 0, 0.4);
+}
