@@ -26,6 +26,25 @@ class Cell extends Component {
     })
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      flag: false,
+      doubt: false
+    };
+  }
+
+  // onContextMenu={e => e.preventDefault()}
+  mark = e => {
+    e.preventDefault();
+
+    this.setState({
+      flag: !this.state.doubt ? !this.state.flag : false,
+      doubt: this.state.flag ? !this.state.doubt : false
+    });
+  };
+
   getSymbol(sign: string) {
     return [CELL_TYPES.hidden, CELL_TYPES.bomb, "0"].includes(sign) ? "" : sign;
   }
@@ -37,13 +56,19 @@ class Cell extends Component {
       onClick
     } = this.props;
 
-    const className = classnames("column", {
+    const className = classnames("cell", {
       opened: value >= 0,
-      error: value === CELL_TYPES.bomb
+      bomb: value === CELL_TYPES.bomb,
+      flag: this.state.flag,
+      doubt: this.state.doubt
     });
 
     return (
-      <span className={className} onClick={onClick.bind(null, [item])}>
+      <span
+        className={className}
+        onClick={onClick.bind(null, [item])}
+        onContextMenu={this.mark}
+      >
         {this.getSymbol(value)}
       </span>
     );

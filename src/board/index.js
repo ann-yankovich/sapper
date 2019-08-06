@@ -19,6 +19,10 @@ class Board extends PureComponent {
   render() {
     const { map, onCellClick } = this.props;
 
+    if (!map) {
+      return null;
+    }
+
     return <View map={formatMap(map)} onClick={onCellClick} />;
   }
 }

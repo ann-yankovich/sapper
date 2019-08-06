@@ -26,7 +26,6 @@ const formatMap = map => {
       .filter(item => item.value > 0)
       .forEach(item => setEmpty(item, formattedMap));
   });
-
   return formattedMap;
 };
 
@@ -98,4 +97,4 @@ function getSiblingsByType(item, sign, map) {
   return result;
 }
 
-export { formatMap, getEmptyItems, CELL_TYPES };
+export { formatMap, getEmptyItems, CELL_TYPES, setValue, getValue };

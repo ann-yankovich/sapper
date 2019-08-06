@@ -17,9 +17,11 @@ export default function SapperView(props) {
 
   return (
     <div className="sapper-wrapper">
-      <Levels level={level} onChange={onLevelChange} />
-      <p>{message}</p>
+      <div>
+        <Levels level={level} onChange={onLevelChange} />
+      </div>
       <div className="info">
+        <span className="message">&nbsp;{`${message}`}</span>
         {fail && <button onClick={restart}>Try again!</button>}
       </div>
       <Board map={map} onCellClick={onCellClick} />

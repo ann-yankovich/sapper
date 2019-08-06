@@ -3,7 +3,6 @@ import View from "./view";
 import { prepareData, RESPONCES_TYPES } from "./helpers";
 
 import "./styles.css";
-import { number } from "prop-types";
 
 class Sapper extends Component {
   constructor() {
@@ -34,7 +33,8 @@ class Sapper extends Component {
 
   start = () => {
     this.setState({
-      fail: false
+      fail: false,
+      map: ""
     });
     this.socket.send(`new ${this.level}`);
     this.socket.send("map");
@@ -83,10 +83,6 @@ class Sapper extends Component {
 
   render() {
     const { map, message } = this.state;
-
-    if (!map) {
-      return null;
-    }
 
     return (
       <View

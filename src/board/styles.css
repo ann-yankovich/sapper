@@ -4,28 +4,38 @@
   justify-content: space-between;
   align-items: stretch;
   color: #999;
-  line-height: 18px;
-  font-size: 14px;
+  /* line-height: 20px; */
+  font-size: 18px;
   text-align: center;
 }
 
-.map .row {
+.row {
   display: flex;
 }
 
-.map .column {
-  min-width: 18px;
-  height: 18px;
+.cell {
+  position: relative;
+  min-width: 22px;
+  height: 22px;
   cursor: pointer;
   border: 1px solid #dee2e6;
+  text-align: center;
 }
 
-.map .marked {
-  background-color: #ffc107;
-}
-.map .opened {
+.cell.opened {
   background-color: #dee2e6;
 }
-.map .error {
-  background-color: #dc3545;
+.cell::before {
+  position: absolute;
+  top: 0;
+  left: 1px;
+}
+.cell.flag::before {
+  content: "🕹";
+}
+.cell.doubt::before {
+  content: "❓";
+}
+.cell.bomb::before {
+  content: "️🧨";
 }

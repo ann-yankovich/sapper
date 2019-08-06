@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import View from './view';
+import React, { PureComponent } from "react";
+import View from "./view";
 
 const LEVELS = {
   easy: 1,
@@ -8,7 +8,7 @@ const LEVELS = {
   nightmare: 4
 };
 
-class Levels extends Component {
+class Levels extends PureComponent {
   onChange = event => {
     this.props.onChange(event.target.value);
   };
