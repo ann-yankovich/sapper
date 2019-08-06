@@ -15,35 +15,37 @@ const formatMap = map => {
     });
   });
 
-  formattedMap.forEach((row, rowIndex) => {
+  formattedMap.forEach(row => {
     row
       .filter(item => item.value > 0)
-      .forEach(item => {
-        let hiddenItems = getSiblingsByType(
-          item,
-          CELL_TYPES.hidden,
-          formattedMap
-        );
-        let bombs = getSiblingsByType(item, CELL_TYPES.bomb, formattedMap);
+      .forEach(item => setBombs(item, formattedMap));
+  });
 
-        if (hiddenItems.length === item.value - bombs.length) {
-          hiddenItems.forEach(i => setValue(i, CELL_TYPES.bomb, formattedMap));
-        }
-
-        bombs = getSiblingsByType(item, CELL_TYPES.bomb, formattedMap);
-        if (bombs.length === +item.value) {
-          const epmtyItems = getSiblingsByType(
-            item,
-            CELL_TYPES.hidden,
-            formattedMap
-          );
-          epmtyItems.forEach(i => setValue(i, CELL_TYPES.empty, formattedMap));
-        }
-      });
+  formattedMap.forEach(row => {
+    row
+      .filter(item => item.value > 0)
+      .forEach(item => setEmpty(item, formattedMap));
   });
 
   return formattedMap;
 };
+
+function setBombs(item, map) {
+  const hiddenItems = getSiblingsByType(item, CELL_TYPES.hidden, map);
+  const bombs = getSiblingsByType(item, CELL_TYPES.bomb, map);
+
+  if (hiddenItems.length === item.value - bombs.length) {
+    hiddenItems.forEach(i => setValue(i, CELL_TYPES.bomb, map));
+  }
+}
+
+function setEmpty(item, map) {
+  const bombs = getSiblingsByType(item, CELL_TYPES.bomb, map);
+  if (bombs.length === +item.value) {
+    const epmtyItems = getSiblingsByType(item, CELL_TYPES.hidden, map);
+    epmtyItems.forEach(i => setValue(i, CELL_TYPES.empty, map));
+  }
+}
 
 const getEmptyItem = map => {
   return map

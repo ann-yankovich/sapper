@@ -49,6 +49,7 @@ class Sapper extends Component {
         } else if (payload === RESPONCES_TYPES.fail) {
           this.start();
         } else if (payload.includes(RESPONCES_TYPES.win)) {
+          this.socket.send('map');
           this.setState({
             message: payload
           });
