@@ -5,8 +5,6 @@ import './styles.css';
 function BoardView(props) {
   const { map } = props;
 
-  console.log(map);
-
   return (
     <div>
       <div className="map">

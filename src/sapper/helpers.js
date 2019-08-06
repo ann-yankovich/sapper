@@ -1,3 +1,9 @@
+const RESPONCES_TYPES = {
+  opened: 'OK',
+  fail: 'You lose',
+  win: 'You win'
+};
+
 const prepareData = eventData => {
   let map = {
     type: '',
@@ -14,4 +20,4 @@ const prepareData = eventData => {
   }, map);
 };
 
-export { prepareData };
+export { prepareData, RESPONCES_TYPES };

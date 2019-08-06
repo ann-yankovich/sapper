@@ -9,7 +9,7 @@ const LEVELS = {
 };
 
 class Levels extends Component {
-  onLevelChange = event => {
+  onChange = event => {
     this.props.onChange(event.target.value);
   };
 

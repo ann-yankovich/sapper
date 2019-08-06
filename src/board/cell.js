@@ -7,7 +7,7 @@ import './styles.css';
 
 class Cell extends Component {
   static propTypes = {
-    // onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
     item: PropTypes.exact({
       value: PropTypes.string.isRequired,
       column: PropTypes.number.isRequired,

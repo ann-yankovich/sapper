@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import View from './view';
-import { prepareData } from './helpers';
+import { prepareData, RESPONCES_TYPES } from './helpers';
 
 import './styles.css';
 
@@ -9,66 +9,59 @@ class Sapper extends Component {
     super();
 
     this.state = {
-      // level: 1,
-      map: null
+      map: '',
+      message: ''
     };
 
+    this.level = 1;
     this.socket = new WebSocket('wss://hometask.eg1236.com/game1/');
   }
 
   componentDidMount() {
-    this.socket.addEventListener('open', this.onConnected);
+    this.socket.addEventListener('open', this.start);
     this.socket.addEventListener('message', this.onMessage);
     // onerror
     // onclose
   }
 
   componentWillUnmount() {
-    this.socket.removeEventListener('open', this.onStart);
+    this.socket.removeEventListener('open', this.start);
     this.socket.removeEventListener('message', this.onMessage);
     this.socket.close();
   }
 
-  onConnected = () => {
-    this.socket.send(`new ${this.state.level}`);
-    this.socket.send('map');
-    // this.openCell(0, 0);
+  start = () => {
+    this.socket.send(`new ${this.level}`);
+    this.socket.send('open 0 0');
   };
 
   onMessage = event => {
     const { type, payload } = prepareData(event.data);
 
-    this.inProcess = false;
-
     switch (type) {
       case 'map':
-        // const map = formatMap(payload, this.openCells);
         this.setState({ map: payload });
         break;
       case 'open':
-        // this.setState({
-        //   finalMessage: payload !== EMPTY_CEIL ? payload : ''
-        // });
         console.log(payload);
-        // if (payload === EMPTY_CEIL) {
-        //   this.socket.send('map');
-        //   this.inProcess = true;
-        // }
-        // if (payload === FAIL) {
-        //   this.startNewGame();
-        // }
+        if (payload === RESPONCES_TYPES.opened) {
+          this.socket.send('map');
+        } else if (payload === RESPONCES_TYPES.fail) {
+          this.start();
+        } else if (payload.includes(RESPONCES_TYPES.win)) {
+          this.setState({
+            message: payload
+          });
+        }
         break;
       default:
-        console.log(payload);
         break;
     }
   };
 
   onLevelChange = level => {
-    this.socket.send(`new ${this.state.level}`);
-    // this.setState({
-    //   level
-    // });
+    this.level = level;
+    this.start();
   };
 
   onCellClick = (column, row) => {
@@ -76,12 +69,17 @@ class Sapper extends Component {
   };
 
   render() {
-    const { map, level } = this.state;
+    const { map, level, message } = this.state;
+
+    if (!map) {
+      return null;
+    }
 
     return (
       <View
         level={level}
         map={map}
+        message={message}
         onCellClick={this.onCellClick}
         onLevelChange={this.onLevelChange}
       />
