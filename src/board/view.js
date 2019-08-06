@@ -1,6 +1,11 @@
 import React from 'react';
 import Cell from './cell';
 import './styles.css';
+import PropTypes from 'prop-types';
+
+BoardView.propTypes = {
+    map: PropTypes.array.isRequired
+};
 
 function BoardView(props) {
   const { map } = props;

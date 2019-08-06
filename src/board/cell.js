@@ -1,20 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import { CELL_TYPES } from "./helpers";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { CELL_TYPES } from './helpers';
 
 import "./styles.css";
-
-// const ItemType = {
-//   value: string,
-//   column: number,
-//   row: number
-// }
-
-// type Props = {
-//   onClick: Function;
-//   item: Object<ItemType>;
-// };
 
 class Cell extends Component {
   static propTypes = {
@@ -45,7 +34,7 @@ class Cell extends Component {
     });
   };
 
-  getSymbol(sign: string) {
+  getSymbol(sign) {
     return [CELL_TYPES.hidden, CELL_TYPES.bomb, "0"].includes(sign) ? "" : sign;
   }
 

@@ -1,5 +1,5 @@
-import React, { PureComponent } from "react";
-import View from "./view";
+import React, { PureComponent } from 'react';
+import View from './view';
 
 const LEVELS = {
   easy: 1,

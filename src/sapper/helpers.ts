@@ -4,7 +4,7 @@ const RESPONCES_TYPES = {
   win: 'You win'
 };
 
-const prepareData = (eventData: Object) => {
+const prepareData = (eventData: string) => {
   let map = {
     type: '',
     payload: ''

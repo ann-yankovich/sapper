@@ -1,6 +1,10 @@
 import React from 'react';
 import './styles.css';
 
+LevelsView.propTypes = {
+  levels: PropTypes.array.isRequired
+};
+
 export default function LevelsView(props) {
   const { levels } = props;
 

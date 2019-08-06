@@ -69,7 +69,7 @@ class Sapper extends Component {
     }
   };
 
-  onLevelChange = (level: number) => {
+  onLevelChange = (level) => {
     this.level = level;
     this.start();
   };
