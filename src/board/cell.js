@@ -1,9 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { CELL_TYPES } from './helpers';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import { CELL_TYPES } from "./helpers";
 
-import './styles.css';
+import "./styles.css";
+
+// const ItemType = {
+//   value: string,
+//   column: number,
+//   row: number
+// }
+
+// type Props = {
+//   onClick: Function;
+//   item: Object<ItemType>;
+// };
 
 class Cell extends Component {
   static propTypes = {
@@ -15,23 +26,24 @@ class Cell extends Component {
     })
   };
 
-  getSymbol(sign) {
-    return [CELL_TYPES.hidden, CELL_TYPES.bomb, '0'].includes(sign) ? '' : sign;
+  getSymbol(sign: string) {
+    return [CELL_TYPES.hidden, CELL_TYPES.bomb, "0"].includes(sign) ? "" : sign;
   }
 
   render() {
     const {
-      item: { value, column, row },
+      item,
+      item: { value },
       onClick
     } = this.props;
 
-    const className = classnames('column', {
+    const className = classnames("column", {
       opened: value >= 0,
       error: value === CELL_TYPES.bomb
     });
 
     return (
-      <span className={className} onClick={onClick.bind(null, column, row)}>
+      <span className={className} onClick={onClick.bind(null, [item])}>
         {this.getSymbol(value)}
       </span>
     );

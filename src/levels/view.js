@@ -5,7 +5,7 @@ export default function LevelsView(props) {
   const { levels } = props;
 
   return (
-    <ul>
+    <ul className="levels">
       {levels.map((item, index) => {
         return (
           <li key={item}>

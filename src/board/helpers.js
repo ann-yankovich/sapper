@@ -1,12 +1,12 @@
 const CELL_TYPES = {
-  bomb: '*',
-  hidden: '□',
-  empty: '+'
+  bomb: "*",
+  hidden: "□",
+  empty: "+"
 };
 
 const formatMap = map => {
-  let formattedMap = map.split('\n').map((item, row) => {
-    return item.split('').map((item, column) => {
+  let formattedMap = map.split("\n").map((item, row) => {
+    return item.split("").map((item, column) => {
       return {
         row,
         column,
@@ -47,13 +47,11 @@ function setEmpty(item, map) {
   }
 }
 
-const getEmptyItem = map => {
-  return map
-    .map(row => {
-      return row.filter(item => item.value === CELL_TYPES.empty).shift();
-    })
-    .filter(item => !!item)
-    .shift();
+const getEmptyItems = map => {
+  return map.reduce((result, row) => {
+    const items = row.filter(item => item.value === CELL_TYPES.empty);
+    return [...result, ...items];
+  }, []);
 };
 
 function setValue({ row, column }, value, map) {
@@ -100,4 +98,4 @@ function getSiblingsByType(item, sign, map) {
   return result;
 }
 
-export { formatMap, getEmptyItem, CELL_TYPES };
+export { formatMap, getEmptyItems, CELL_TYPES };

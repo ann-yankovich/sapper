@@ -1,26 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import View from './view';
-import { formatMap, getEmptyItem } from './helpers';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import View from "./view";
+import { formatMap, getEmptyItems } from "./helpers";
 
-class Board extends Component {
-  static propTypes = {
-    map: PropTypes.string.isRequired,
-    onCellClick: PropTypes.func.isRequired
-  };
+class Board extends PureComponent {
+  // static propTypes = {
+  //   map: PropTypes.string.isRequired,
+  //   onCellClick: PropTypes.func.isRequired
+  // };
 
-  componentDidMount() {
-    this.nextStep();
-  }
-
-  componentDidUpdate(prevProps) {
-    this.nextStep();
-  }
-
-  nextStep() {
-    const emptyItem = getEmptyItem(formatMap(this.props.map));
-    if (emptyItem) {
-      this.props.onCellClick.call(null, emptyItem.column, emptyItem.row);
+  componentDidUpdate() {
+    const emptyItems = getEmptyItems(formatMap(this.props.map));
+    if (emptyItems.length) {
+      this.props.onCellClick.call(null, emptyItems);
     }
   }
 
