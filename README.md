@@ -1,3 +1,3 @@
 # sapper
-Supper
+Sapper
 https://q7v73.csb.app/
